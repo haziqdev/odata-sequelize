@@ -96,8 +96,15 @@ function transformTree(root, sequelize) {
 
       const targetObj = tmp[0];
       const key = Object.keys(targetObj)[0];
-      const value = targetObj[key];
-
+      let value;
+      if (
+        rootSymbol.toString() === Symbol("contains").toString() ||
+        rootSymbol.toString() === Symbol("contained").toString()
+      ) {
+        value = targetObj[key].split(",");
+      } else {
+        value = targetObj[key];
+      }
       if (!!value.constructor && value.constructor.name === "Where") {
         [root] = tmp;
       } else {
