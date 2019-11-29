@@ -1,17 +1,6 @@
 const parser = require("odata-parser");
 
-const objectOperators = [
-  "and",
-  "or",
-  "between",
-  "notBetween",
-  "in",
-  "notIn",
-  "any",
-  "overlap",
-  "contains",
-  "contained"
-];
+const objectOperators = ["and", "or", "between", "notBetween", "in", "notIn", "any", "overlap"];
 const valueOperators = [
   "gt",
   "gte",
@@ -28,7 +17,9 @@ const valueOperators = [
   "notRegexp",
   "iRegexp",
   "notIRegexp",
-  "col"
+  "col",
+  "contains",
+  "contained"
 ];
 const customOperators = [
   "ge",
