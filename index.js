@@ -19,7 +19,8 @@ const valueOperators = [
   "notIRegexp",
   "col",
   "contains",
-  "contained"
+  "contained",
+  "overlap"
 ];
 const customOperators = [
   "ge",
@@ -90,7 +91,8 @@ function transformTree(root, sequelize) {
       let value;
       if (
         rootSymbol.toString() === Symbol("contains").toString() ||
-        rootSymbol.toString() === Symbol("contained").toString()
+        rootSymbol.toString() === Symbol("contained").toString() ||
+        rootSymbol.toString() === Symbol("overlap").toString()
       ) {
         value = targetObj[key].split(",");
       } else {
