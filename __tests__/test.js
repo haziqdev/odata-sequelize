@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 
 const parser = require("../index");
 
-const sequelize = new Sequelize({ dialect: "sqlite" });
+const sequelize = new Sequelize({ dialect: "mysql" });
 
 describe("#odataParser", () => {
   it("should parse top", () => {
