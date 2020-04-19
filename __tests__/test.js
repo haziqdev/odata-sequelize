@@ -114,6 +114,29 @@ describe("#odataParser", () => {
     });
   });
 
+  it("should parse filter is", () => {
+    const result = parser("$filter=age is null", sequelize);
+    expect(result).toStrictEqual({
+      where: {
+        age: {
+          [sequelize.Sequelize.Op.is]: null
+        }
+      }
+    });
+  });
+
+  it("should parse filter in", () => {
+    const result = parser("$filter=statut in ('prod','test')", sequelize);
+    expect(result).toStrictEqual({
+      where: {
+        statut: {
+          [sequelize.Sequelize.Op.in]: ["prod", "test"]
+        }
+      }
+    });
+  });
+
+
   it("should parse filter substringof", () => {
     const result = parser("$filter=substringof('prefix', foo)", sequelize);
     expect(result).toStrictEqual({

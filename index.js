@@ -8,6 +8,8 @@ const valueOperators = [
   "lte",
   "ne",
   "eq",
+  "is",
+  "in",
   "not",
   "like",
   "notLike",
@@ -102,7 +104,11 @@ function transformTree(root, sequelize) {
         [root] = tmp;
       } else {
         root[key] = {};
-        root[key][rootSymbol] = value;
+        if (value instanceof Array && value[0] === "null") {
+          root[key][rootSymbol] = null;
+        } else {
+          root[key][rootSymbol] = value;
+        }
       }
     } else {
       root[rootSymbol].forEach((obj, index) => {
@@ -211,12 +217,17 @@ function parseFunctionCall(obj, root, operator, sequelize) {
 
 function preOrderTraversal(root, baseObj, operator, sequelize) {
   const strOperator = root.type === "functioncall" ? root.func : root.type;
-  if (root.type !== "property" && root.type !== "literal")
+  if (
+    root.type !== "property" &&
+    root.type !== "literal" &&
+    root.type !== "literalArray" &&
+    root.type !== "functioncall"
+  )
     operator = strOperator ? getOperator(strOperator, sequelize) : operator;
 
   if (root.type === "functioncall") {
     parseFunctionCall(root, baseObj, operator, sequelize);
-  } else if (root.type === "property" || root.type === "literal") {
+  } else if (root.type === "property" || root.type === "literal" || root.type === "literalArray") {
     if (root.type === "property") {
       baseObj.push({});
       const { length } = baseObj;

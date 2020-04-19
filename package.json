@@ -21,7 +21,7 @@
     "url": "https://github.com/Vicnovais/odata-sequelize"
   },
   "dependencies": {
-    "odata-parser": "git+https://github.com/mohammad-khooie/node-odata-parser.git"
+    "odata-parser": "git+https://github.com/Trolhebus/node-odata-parser.git"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
