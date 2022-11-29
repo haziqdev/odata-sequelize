@@ -54,7 +54,7 @@ function getOperator(strOperator, sequelize) {
     throw new Error(`Operator not recognized: ${strOperator}`);
 
   const selectedOperator = sequelize.Sequelize.Op[strOperator];
-
+  console.log(selectedOperator)
   if (!selectedOperator) {
     switch (strOperator) {
       case "ge":
@@ -63,7 +63,7 @@ function getOperator(strOperator, sequelize) {
         return sequelize.Sequelize.Op.lte;
       case "substringof":
       case "startswith":
-        return sequelize.Sequelize.Op.like;
+        return sequelize.Sequelize.Op.ilike;
       case "tolower":
       case "toupper":
       case "trim":
