@@ -35,6 +35,7 @@ const customOperators = [
   "le",
   "substringof",
   "startswith",
+  "endswith",
   "tolower",
   "toupper",
   "trim",
@@ -69,6 +70,7 @@ function getOperator(strOperator, sequelize) {
         return sequelize.Sequelize.Op.lte;
       case "substringof":
       case "startswith":
+      case "endswith":
         return sequelize.Sequelize.Op.iLike;
       case "tolower":
       case "toupper":
@@ -179,6 +181,9 @@ function parseFunction(obj, root, baseOperator, sequelize) {
     case "startswith":
       value = `${args[0].value}%`;
       break;
+    case "endswith":
+      value = `${args[0].value}%`;
+      break;
     case "tolower":
     case "toupper":
     case "trim":
@@ -212,6 +217,7 @@ function parseFunctionCall(obj, root, operator, sequelize) {
   switch (obj.func) {
     case "substringof":
     case "startswith":
+    case "endswith":
     case "tolower":
     case "toupper":
     case "trim":
