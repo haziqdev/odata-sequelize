@@ -69,7 +69,7 @@ function getOperator(strOperator, sequelize) {
         return sequelize.Sequelize.Op.lte;
       case "substringof":
       case "startswith":
-        return sequelize.Sequelize.Op.like;
+        return sequelize.Sequelize.Op.iLike;
       case "tolower":
       case "toupper":
       case "trim":
