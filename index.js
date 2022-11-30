@@ -182,7 +182,7 @@ function parseFunction(obj, root, baseOperator, sequelize) {
       value = `${args[0].value}%`;
       break;
     case "endswith":
-      value = `${args[0].value}%`;
+      value = `%${args[0].value}`;
       break;
     case "tolower":
     case "toupper":
